@@ -15,7 +15,7 @@ router.get("/", checkToken, getUsers);
 //register
 router.post("/register", createUser);
 //register
-router.post("/createAdmin", createAdmin);
+router.post("/createAdmin", createAdmin); //check he's admin
 //Login
 router.post("/login", login);
 //Update

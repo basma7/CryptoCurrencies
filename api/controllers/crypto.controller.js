@@ -1,4 +1,10 @@
-const { create, getCryptoByID } = require("../services/crypto.service");
+const {
+  create,
+  getCMID,
+  getCryptos,
+  getCryptoPeriod,
+  deleteCrypto
+} = require("../services/crypto.service");
 
 module.exports = {
   addCurrency: (req, res) => {
@@ -17,9 +23,21 @@ module.exports = {
       });
     });
   },
-  getCryptoByCMID: (req, res) => {
+  getCMID: (req, res) => {
+    getCMID((err, results) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      return res.json({
+        success: 1,
+        data: results
+      });
+    });
+  },
+  getCryptos: (req, res) => {
     const cmid = req.params.cmid;
-    getCryptoByID(cmid, (err, results) => {
+    getCryptos(cmid, (err, results) => {
       if (err) {
         console.log(err);
         return;
@@ -30,9 +48,50 @@ module.exports = {
           message: "Record not Found"
         });
       }
+      results.password = undefined;
       return res.json({
         success: 1,
         data: results
+      });
+    });
+  },
+  getCryptoPeriod: (req, res) => {
+    const cmid = req.params.cmid;
+    const period = req.params.period;
+    getCryptoPeriod(cmid, period, (err, results) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      if (!results) {
+        return res.json({
+          success: 0,
+          message: "Record not Found"
+        });
+      }
+      results.password = undefined;
+      return res.json({
+        success: 1,
+        data: results
+      });
+    });
+  },
+  deleteCrypto: (req, res) => {
+    const data = req.body;
+    deleteCrypto(data.cmid, (err, results) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      if (!results) {
+        return res.json({
+          success: 0,
+          message: "Record Not Found"
+        });
+      }
+      return res.json({
+        success: 1,
+        message: "crypto deleted successfully"
       });
     });
   }

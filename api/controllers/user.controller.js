@@ -14,6 +14,7 @@ const { sign } = require("jsonwebtoken");
 module.exports = {
   createAdmin: (req, res) => {
     const body = req.body;
+    const admin = req.body.admin;
     const salt = genSaltSync(10);
     body.password = hashSync(body.password, salt);
     createAdmin(body, (err, results) => {
@@ -95,7 +96,6 @@ module.exports = {
       });
     });
   },
-
   login: (req, res) => {
     const body = req.body;
     getUserByUserEmail(body.email, (err, results) => {

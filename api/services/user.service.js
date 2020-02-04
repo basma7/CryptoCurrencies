@@ -15,7 +15,7 @@ module.exports = {
   },
   createAdmin: (data, callBack) => {
     pool.query(
-      "insert into user(admin, nickname, email, password, currency) values (?, ? , ?, ?)",
+      "insert into user(admin, nickname, email, password, currency) values (?, ?, ? , ?, ?)",
       ["1", data.email, data.email, data.password, "EUR"],
       (error, results, fields) => {
         if (error) {
@@ -73,10 +73,10 @@ module.exports = {
       }
     );
   },
-  deleteUser: (data, callBack) => {
+  deleteUser: (cmid, callBack) => {
     pool.query(
-      `delete from user where id = ?`,
-      [data.id],
+      `delete from user where cmid = ?`,
+      [cmid],
       (error, results, fields) => {
         if (error) {
           callBack(error);
