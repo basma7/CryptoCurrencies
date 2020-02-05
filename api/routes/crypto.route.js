@@ -1,10 +1,11 @@
 const router = require("express").Router();
 const { checkToken } = require("../../auth/token.validation");
 const {
+  getCMID,
   getCryptos,
+  getCrypto,
   getCryptoPeriod,
   addCurrency,
-  getCMID,
   deleteCrypto
 } = require("../controllers/crypto.controller");
 
@@ -12,7 +13,10 @@ const {
 router.get("/getCMID", getCMID);
 
 // //Get the list of crypto-currencies and their informations
-router.get("/crypto/:cmid", getCryptos);
+router.get("/cryptos/cmids", getCryptos);
+
+// //Get the list of crypto-currencies and their informations
+router.get("/cryptos/:cmid", getCrypto);
 
 //Get the price history of a cryptocurrency
 router.get("/cryptos/:cmid/history/:period", getCryptoPeriod);

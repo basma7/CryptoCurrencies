@@ -35,7 +35,7 @@ module.exports = {
       });
     });
   },
-  getCryptos: (req, res) => {
+  getCrypto: (req, res) => {
     const cmid = req.params.cmid;
     getCryptos(cmid, (err, results) => {
       if (err) {
@@ -48,7 +48,6 @@ module.exports = {
           message: "Record not Found"
         });
       }
-      results.password = undefined;
       return res.json({
         success: 1,
         data: results
@@ -92,6 +91,35 @@ module.exports = {
       return res.json({
         success: 1,
         message: "crypto deleted successfully"
+      });
+    });
+  },
+  getCryptos: (req, res) => {
+    getCMID((err, results) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      var list = "";
+      results.forEach(element => {
+        list += element.CMID + ",";
+      });
+      console.log(list);
+      getCryptos(list, (err, results) => {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        if (!results) {
+          return res.json({
+            success: 0,
+            message: "Record not Found"
+          });
+        }
+        return res.json({
+          success: 1,
+          data: results
+        });
       });
     });
   }
