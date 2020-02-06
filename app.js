@@ -3,9 +3,9 @@ const express = require('express');
 const app = express();
 const userRouter = require("./api/routes/user.route");
 const cryptoRouter = require("./api/routes/crypto.route");
-
-app.use(express.json())
-app.use("/api/users", userRouter, cryptoRouter)
+const articlesRouter = require('./api/routes/articles');
+app.use(express.json());
+app.use("/api/users", userRouter, cryptoRouter,articlesRouter);
 
 
 // start the app
