@@ -1,0 +1,39 @@
+.crypto-content {
+  /*padding-left: 5%;*/
+}
+
+.crypto-title {
+  margin: 3%;
+  text-align: center;
+}
+
+.crypto-container {
+  margin: 5%;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.limit {
+  width: 100%;
+  height: 1%;
+  border: 1px solid black;
+}
+
+.form-width {
+  width: 50%;
+}
+
+.btn-newcrypto {
+  margin: 2.8% 5%;
+  width: 40%;
+  height: 90%;
+}
