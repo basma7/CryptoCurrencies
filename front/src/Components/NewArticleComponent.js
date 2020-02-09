@@ -25,7 +25,7 @@ export default class NewArticleComponent extends Component {
   {
     return (
         <Container>
-          <h1 className="article-title">NewArticle</h1>
+          <h1 className="article-title">New article</h1>
           <Form onSubmit={this.onNewArticle}>
               <Form.Group controlId="title">
                 <Form.Label>Title</Form.Label>

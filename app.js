@@ -9,6 +9,6 @@ app.use("/api/users", userRouter, cryptoRouter)
 
 
 // start the app
-app.listen(process.env.APP_PORT, () =>{
-  console.log('Express is running on port', process.env.APP_PORT );
+app.listen(process.env.APP_PORT || 3000, () =>{
+  console.log('Express is running on port', process.env.APP_PORT || 3000);
 });

@@ -16,16 +16,19 @@ class App extends Component {
     return (
       <div className="App">
       <Router>
-        <Navbar bg="dark" variant="dark">
-          <Nav className="mr-auto">
-          <Navbar.Brand href="/">Crypto-Currencies</Navbar.Brand>
-          <Link className="navbar-dark navbar-nav nav-link navbar-expand" to="/login">Login</Link>
-          <Link className="navbar-dark navbar-nav nav-link navbar-expand" to="/register">Register</Link>
-            <Link className="navbar-dark navbar-nav nav-link navbar-expand" to="/crypto">Crypto</Link>
-            <Link className="navbar-dark navbar-nav nav-link navbar-expand" to="/articles">Articles</Link>
-            <Link className="navbar-dark navbar-nav nav-link navbar-expand" to="/create/crypto">Create Crypto</Link>
-            <Link className="navbar-dark navbar-nav nav-link navbar-expand" to="/create/articles">Create Articles</Link>
-          </Nav>
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar.Brand href="/">Crypto-Currencies</Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="mr-auto">
+              <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/login">Login</Link>
+              <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/register">Register</Link>
+              <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/crypto">Crypto</Link>
+              <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/articles">Articles</Link>
+              <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/create/crypto">Create Crypto</Link>
+              <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/create/articles">Create Articles</Link>
+            </Nav>
+          </Navbar.Collapse>
         </Navbar>
         <Switch>
           <Route path="/login" component={LoginComponent}  />
