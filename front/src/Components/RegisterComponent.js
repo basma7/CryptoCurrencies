@@ -20,18 +20,23 @@ export default class RegisterComponent extends Component {
     this.state.register.nickname = event.target.nickname.value
     this.state.register.email = event.target.email.value
     this.state.register.password = event.target.password.value
-    console.log(this.state.register)
-    const user = {
-      nickname: this.state.login.nickname,
-			email: this.state.login.email,
-			password: this.state.login.password
-		};
+    let user = {
+      email: this.state.register.email,
+      password: this.state.register.password
+    };
+    if (this.state.register.nickname != "") {
+      user = {
+        nickname: this.state.register.nickname,
+		  	email: this.state.register.email,
+		  	password: this.state.register.password
+      };
+    }
 		console.log(user);
-		fetch('https://localhost:3000/api/register', {
+		fetch('http://localhost:3000/api/users/register', {
 			method: 'POST',
 			headers: {
-			  'Accept': 'application/json',
-			  'Content-Type': 'text/plain'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
 			},
 		    body: JSON.stringify(user)
 		}).then(res => res.json())

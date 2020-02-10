@@ -19,17 +19,16 @@ export default class LoginComponent extends Component {
         event.preventDefault()
         this.state.login.email = event.target.email.value
         this.state.login.password = event.target.password.value
-        console.log(this.state.login)
-        const user = {
-			email: this.state.login.email,
-			password: this.state.login.password
-		};
+        let user = {
+            "email": "nico@nico.fr",
+            "password": "azerty"
+        };
 		console.log(user);
-		fetch('https://localhost:3000/api/login', {
+		fetch('http://localhost:3000/api/users/login', {
 			method: 'POST',
 			headers: {
-			  'Accept': 'application/json',
-			  'Content-Type': 'text/plain'
+              'Content-Type': 'text/plain',
+              'Access-Control-Allow-Origin': '*'
 			},
 		    body: JSON.stringify(user)
 		}).then(res => res.json())
