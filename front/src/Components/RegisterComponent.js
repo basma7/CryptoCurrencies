@@ -9,8 +9,7 @@ export default class RegisterComponent extends Component {
     this.onRegister = this.onRegister.bind(this)
     this.state = {
       register: {
-        firstname: "",
-        lastname: "",
+        nickname: "",
         email: "",
         password: "",
       } 
@@ -23,6 +22,21 @@ export default class RegisterComponent extends Component {
     this.state.register.email = event.target.email.value
     this.state.register.password = event.target.password.value
     console.log(this.state.register)
+    const user = {
+      nickname: this.state.login.nickname,
+			email: this.state.login.email,
+			password: this.state.login.password
+		};
+		console.log(user);
+		fetch('https://localhost:3000/api/register', {
+			method: 'POST',
+			headers: {
+			  'Accept': 'application/json',
+			  'Content-Type': 'text/plain'
+			},
+		    body: JSON.stringify(user)
+		}).then(res => res.json())
+		.then(data => console.log(data));
   }
   render() 
   {
@@ -33,14 +47,10 @@ export default class RegisterComponent extends Component {
             <Col xs={12} md={8} xl={4}>
               <h1 className="register-title">Register</h1>
               <Form onSubmit={this.onRegister}>
-                  <Form.Group controlId="firstname">
-                    <Form.Label>Firstname</Form.Label>
-                    <Form.Control placeholder="Enter Firstname" />
-                  </Form.Group>
 
-                  <Form.Group controlId="lastname">
-                    <Form.Label>Lastname</Form.Label>
-                    <Form.Control placeholder="Enter Lastname" />
+                  <Form.Group controlId="nickname">
+                    <Form.Label>Nickname</Form.Label>
+                    <Form.Control placeholder="Enter Nickname" />
                   </Form.Group>
                 
                   <Form.Group controlId="email">
