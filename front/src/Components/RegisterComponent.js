@@ -17,8 +17,7 @@ export default class RegisterComponent extends Component {
 }
   onRegister(event) {
     event.preventDefault()
-    this.state.register.firstname = event.target.firstname.value
-    this.state.register.lastname = event.target.lastname.value
+    this.state.register.nickname = event.target.nickname.value
     this.state.register.email = event.target.email.value
     this.state.register.password = event.target.password.value
     console.log(this.state.register)
