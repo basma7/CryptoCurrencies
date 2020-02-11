@@ -9,6 +9,8 @@ import ArticlesComponent from './Components/ArticlesComponent';
 import NewCryptoComponent from './Components/NewCryptoComponent';
 import UserCryptoComponent from './Components/UserCryptoComponent';
 import NewCryptoUserComponent from './Components/NewCryptoUserComponent';
+import DeleteUserComponent from './Components/DeleteUserComponent';
+import DeleteCryptoComponent from './Components/DeleteCryptoComponent';
 import {Navbar, Nav, Container, Row} from 'react-bootstrap';
 import { Link, Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
@@ -69,6 +71,7 @@ disconnect() {
           </Navbar.Collapse>
         </Navbar>
         <Switch>
+          <Route path="/user" component={UserComponent}  />
           <Route path="/login" component={() => <LoginComponent /> }  />
           <Route path="/register" component={RegisterComponent}  />
           <Route path="/user/cryptos" component={UserCryptoComponent}  />
@@ -76,6 +79,8 @@ disconnect() {
           <Route path="/articles" component={ArticlesComponent}  />
           <Route path="/crypto/create" component={NewCryptoComponent}  />
           <Route path="/user/crypto/create" component={NewCryptoUserComponent}  />
+          <Route path="/delete/cryptos" component={DeleteCryptoComponent}  />
+          <Route path="/delete/users" component={DeleteUserComponent}  />
         </Switch>
       </Router>
 
