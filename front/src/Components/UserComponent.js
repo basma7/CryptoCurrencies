@@ -65,7 +65,7 @@ saveSuccess(data) {
       };
     }
 		fetch('http://localhost:3000/api/users/profile', {
-			method: 'POST',
+			method: 'PATCH',
 			headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
