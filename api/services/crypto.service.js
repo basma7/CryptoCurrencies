@@ -2,7 +2,7 @@ const pool = require("../../config/db");
 module.exports = {
   create: (data, callBack) => {
     pool.query(
-      "insert into crypto(CMID, Name, CurrentPrice, OpeningPrice, LowestPrice, HighestPrice, URL) values (?, ?, ?, ?, ?, ?, ?)",
+      "insert into crypto(Symbol, Name, CurrentPrice, OpeningPrice, LowestPrice, HighestPrice, URL) values (?, ?, ?, ?, ?, ?, ?)",
       [
         data.CMID,
         data.Name,
