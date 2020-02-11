@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const { checkToken } = require("../../auth/token.validation");
+const { checkAdmin } = require("../../authorize/authorize");
+
 const {
-  getCMID,
   getCryptos,
   getCrypto,
   getCryptoPeriod,
@@ -9,22 +10,19 @@ const {
   deleteCrypto
 } = require("../controllers/crypto.controller");
 
-//Get All cryptos CMID entered by the admin in database
-router.get("/getCMID", getCMID);
+//Get the list of crypto-currencies and their informations
+router.get("/cryptos/cmids", checkAdmin, getCryptos);
 
-// //Get the list of crypto-currencies and their informations
-router.get("/cryptos/cmids", getCryptos);
-
-// //Get the list of crypto-currencies and their informations
+// 
 router.get("/cryptos/:cmid", getCrypto);
 
 //Get the price history of a cryptocurrency
 router.get("/cryptos/:cmid/history/:period", getCryptoPeriod);
 
 //Add a cryptocurrency to your platform
-router.post("/cryptos", addCurrency);
+router.post("/cryptos", checkAdmin,  addCurrency);
 
 // Deletes a cryptocurrency
-router.delete("/cryptos", deleteCrypto);
+router.delete("/cryptos", checkAdmin, deleteCrypto);
 
 module.exports = router;

@@ -1,7 +1,7 @@
 const { verify } = require("jsonwebtoken");
 
 module.exports = {
-  checkAdmin: (req, res, next) => {
+  getID: (req, res, next) => {
     let token = req.get("authorization");
     if (token) {
       // Remove Bearer from string
@@ -13,17 +13,9 @@ module.exports = {
             message: "Invalid Token..."
           });
         } else {
-          console.log("ID: " + decoded.result.id);
-          console.log("Admin: " + decoded.result.admin);
-          if (decoded.result.admin == 0) {
-            return res.json({
-              success: 0,
-              message:
-                "Access Denied! Unauthorized User, Sorry you're not admin"
-            });
-          } else {
-            next();
-          }
+          req.USERID = decoded.result.id
+          console.log("ID: " + req.USERID);
+          next();
         }
       });
     } else {
