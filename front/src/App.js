@@ -7,7 +7,8 @@ import RegisterComponent from './Components/RegisterComponent';
 import CryptoComponent from './Components/CryptoComponent';
 import ArticlesComponent from './Components/ArticlesComponent';
 import NewCryptoComponent from './Components/NewCryptoComponent';
-import NewArticleComponent from './Components/NewArticleComponent';
+import UserCryptoComponent from './Components/UserCryptoComponent';
+import NewCryptoUserComponent from './Components/NewCryptoUserComponent';
 import {Navbar, Nav, Container, Row} from 'react-bootstrap';
 import { Link, Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
@@ -39,7 +40,9 @@ isAdmin(isAdmin) {
             <Nav className="mr-auto">
               { this.state.isLogin ? 
               <div className="content">
-                <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/crypto">Crypto</Link>
+                <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/user/cryptos">Users Cryptos</Link>
+                <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/cryptos">Cryptos</Link>
+                <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/user/crypto/create">Create User Crypto</Link>
                 <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/articles">Articles</Link>
               </div>
               :
@@ -49,7 +52,7 @@ isAdmin(isAdmin) {
               </div>
               }
               { this.state.isAdmin ?
-              <div className="content"><Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/create/crypto">Create Crypto</Link></div>
+                <div className="content"><Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/crypto/create">Create Crypto</Link></div>
               : null
               }
             </Nav>
@@ -58,9 +61,11 @@ isAdmin(isAdmin) {
         <Switch>
           <Route path="/login" component={() => <LoginComponent isLogin={this.isLogged} isAdmin={this.isAdmin} /> }  />
           <Route path="/register" component={RegisterComponent}  />
+          <Route path="/user/crypto" component={UserCryptoComponent}  />
           <Route path="/crypto" component={CryptoComponent}  />
           <Route path="/articles" component={ArticlesComponent}  />
-          <Route path="/create/crypto" component={NewCryptoComponent}  />
+          <Route path="/crypto/create" component={NewCryptoComponent}  />
+          <Route path="/user/crypto/create" component={NewCryptoUserComponent}  />
         </Switch>
       </Router>
 

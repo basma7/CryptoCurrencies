@@ -3,7 +3,7 @@ import './Login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Form, Button, Container, Row, Col} from 'react-bootstrap';
 
-
+var jwtDecode = require('jwt-decode');
 
 export default class LoginComponent extends Component {
   constructor(props) {
@@ -19,9 +19,14 @@ export default class LoginComponent extends Component {
 }
 
     saveSuccess(data) {
+        console.log(data);
         if (data.success == 0) {
+            var decoded = jwtDecode(data.token);
+            if (decoded.result.admin == "1") {
+                this.props.isAdmin(true)
+            }
             this.props.isLogin(true);
-            window.location = "/crypto"
+            window.location = "/cryptos"
         }
     }
     onLogin(event) {
@@ -36,7 +41,7 @@ export default class LoginComponent extends Component {
 		fetch('http://localhost:3000/api/users/login', {
 			method: 'POST',
 			headers: {
-              'Content-Type': 'text/plain',
+              'Content-Type': 'application/json',
               'Access-Control-Allow-Origin': '*'
 			},
 		    body: JSON.stringify(user)
