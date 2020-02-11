@@ -42,19 +42,22 @@ export default class CryptoComponent extends Component {
     }).then(res => res.json())
     .then(data => {
       console.log(data);
-      let tmpObj = {};
       console.log("data  :" , data.data.Data);
+      let i = 0;
       for (let currency of data.data.Data) {
+        let tmpObj = {};
         tmpObj["symbol"] = currency.CoinInfo.Name;
         tmpObj["name"] = currency.CoinInfo.FullName;
         tmpObj["price"] = Math.random() * 10000;
+        tmpObj["id"] = i++;
         console.log(tmpObj);
         this.setState(state => {
-        const list = state.list.concat([tmpObj]);
-        return {
-          list
-        };
-      });
+          const list = state.list.concat([tmpObj]);
+          return {
+            list
+          };
+        });
+        console.log(this.state.list);
       }
     });
   }
