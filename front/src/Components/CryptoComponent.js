@@ -33,7 +33,7 @@ export default class CryptoComponent extends Component {
         }
       ]
     };
-    fetch('https://localhost:3000/api/users/cryptos', {
+    fetch('http://localhost:3000/api/users/cryptos/cmids', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -41,13 +41,12 @@ export default class CryptoComponent extends Component {
       },
     }).then(res => res.json())
     .then(data => {
-      data = [{symbol: "BTC", name: "Bitcoin", price: 10000, sort: true},
-              {symbol: "XLM", name: "Stellar", price: 0.6, sort: true}]
+      console.log(data);
       let tmpObj = {};
-      console.log("data  :" , data);
-      for (let currency of data) {
-        tmpObj["symbol"] = currency.Name;
-        tmpObj["name"] = currency.FullName;
+      console.log("data  :" , data.data.Data);
+      for (let currency of data.data.Data) {
+        tmpObj["symbol"] = currency.CoinInfo.Name;
+        tmpObj["name"] = currency.CoinInfo.FullName;
         tmpObj["price"] = Math.random() * 10000;
         console.log(tmpObj);
         this.setState(state => {

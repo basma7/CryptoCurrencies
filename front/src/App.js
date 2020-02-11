@@ -12,6 +12,22 @@ import {Navbar, Nav, Container, Row} from 'react-bootstrap';
 import { Link, Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 class App extends Component {
+  constructor(props) {
+    super();
+    this.isLogged = this.isLogged.bind(this)
+    this.isAdmin = this.isAdmin.bind(this)
+    this.state = {
+        isLogin: false,
+        isAdmin: false
+    }
+}
+isLogged(isLogin) {
+  this.setState({isLogin})
+}
+
+isAdmin(isAdmin) {
+  this.setState({isAdmin})
+}
   render() {
     return (
       <div className="App">
@@ -21,22 +37,30 @@ class App extends Component {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
-              <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/login">Login</Link>
-              <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/register">Register</Link>
-              <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/crypto">Crypto</Link>
-              <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/articles">Articles</Link>
-              <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/create/crypto">Create Crypto</Link>
-              <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/create/articles">Create Articles</Link>
+              { this.state.isLogin ? 
+              <div className="content">
+                <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/crypto">Crypto</Link>
+                <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/articles">Articles</Link>
+              </div>
+              :
+              <div className="content">
+                <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/login">Login</Link>
+                <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/register">Register</Link>
+              </div>
+              }
+              { this.state.isAdmin ?
+              <div className="content"><Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/create/crypto">Create Crypto</Link></div>
+              : null
+              }
             </Nav>
           </Navbar.Collapse>
         </Navbar>
         <Switch>
-          <Route path="/login" component={LoginComponent}  />
+          <Route path="/login" component={() => <LoginComponent isLogin={this.isLogged} isAdmin={this.isAdmin} /> }  />
           <Route path="/register" component={RegisterComponent}  />
           <Route path="/crypto" component={CryptoComponent}  />
           <Route path="/articles" component={ArticlesComponent}  />
           <Route path="/create/crypto" component={NewCryptoComponent}  />
-          <Route path="/create/articles" component={NewArticleComponent}  />
         </Switch>
       </Router>
 
