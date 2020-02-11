@@ -7,7 +7,16 @@ import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
 let moneyEquiv = {
   "BTC": "Bitcoin",
-  "XLM": "Stellar"
+  "XLM": "Stellar",
+  "ETH": "Ethereum",
+  "XRP": "Ripple",
+  "BCH": "Bitcoin Cash",
+  "BSV": "Bitcoin SV",
+  "EOS": "EOS",
+  "LTC": "Litecoin",
+  "USDT": "Thether",
+  "BNB": "Binance Coin",
+  "XZT": "Tezos"
 }
 
 
@@ -70,7 +79,7 @@ export default class UserCryptoComponent extends Component {
       
       ]
     };
-    fetch('http://localhost:3000/api/users/cryptos/cmids', {
+    fetch('http://localhost:3000/api/users/cryptos/getCryptopre', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
