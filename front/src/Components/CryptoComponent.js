@@ -10,10 +10,6 @@ export default class CryptoComponent extends Component {
   constructor(props) {
     super();
     this.state = {
-      crypto: {
-          email: "",
-          password: "",
-      },
       list: [],
       columns: [
         {

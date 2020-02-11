@@ -15,19 +15,28 @@ import { Link, Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 class App extends Component {
   constructor(props) {
     super();
-    this.isLogged = this.isLogged.bind(this)
+    this.isLogin = this.isLogin.bind(this)
     this.isAdmin = this.isAdmin.bind(this)
     this.state = {
-        isLogin: true,
-        isAdmin: true
+        isLogin: false,
+        isAdmin: false
     }
 }
-isLogged(isLogin) {
+async componentDidMount() {
+  this.setState({isLogin: localStorage.getItem("isLogin")});
+  this.setState({isAdmin: localStorage.getItem("isAdmin")});
+}
+
+isLogin(isLogin) {
   this.setState({isLogin})
 }
 
 isAdmin(isAdmin) {
   this.setState({isAdmin})
+}
+disconnect() {
+  localStorage.removeItem('isLogin');
+  localStorage.removeItem('isAdmin');
 }
   render() {
     return (
@@ -44,6 +53,7 @@ isAdmin(isAdmin) {
                 <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/cryptos">Cryptos</Link>
                 <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/user/crypto/create">Create User Crypto</Link>
                 <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/articles">Articles</Link>
+                <Link className="navbar-dark navbar-nav nav-link navbar-expand nav-right" to="/login" onClick={this.disconnect}>Disconnect</Link>
               </div>
               :
               <div className="content">
@@ -59,7 +69,7 @@ isAdmin(isAdmin) {
           </Navbar.Collapse>
         </Navbar>
         <Switch>
-          <Route path="/login" component={() => <LoginComponent isLogin={this.isLogged} isAdmin={this.isAdmin} /> }  />
+          <Route path="/login" component={() => <LoginComponent /> }  />
           <Route path="/register" component={RegisterComponent}  />
           <Route path="/user/cryptos" component={UserCryptoComponent}  />
           <Route path="/cryptos" component={CryptoComponent}  />

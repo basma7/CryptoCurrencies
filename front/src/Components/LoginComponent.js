@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Form, Button, Container, Row, Col} from 'react-bootstrap';
+import { Route } from 'react-router-dom'
 
 var jwtDecode = require('jwt-decode');
 
@@ -20,13 +21,13 @@ export default class LoginComponent extends Component {
 
     saveSuccess(data) {
         console.log(data);
-        if (data.success == 0) {
+        if (data.success == 1) {
+            localStorage.setItem('isLogin', true);
+            window.location = "/cryptos"
             var decoded = jwtDecode(data.token);
             if (decoded.result.admin == "1") {
-                this.props.isAdmin(true)
+                localStorage.setItem('isAdmin', true);
             }
-            this.props.isLogin(true);
-            window.location = "/cryptos"
         }
     }
     onLogin(event) {
