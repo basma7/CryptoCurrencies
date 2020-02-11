@@ -48,3 +48,7 @@
 .register {
   width: 50%;
 }
+
+.content {
+  display: contents;
+}

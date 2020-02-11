@@ -3,11 +3,14 @@ import './Login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Form, Button, Container, Row, Col} from 'react-bootstrap';
 
+
+
 export default class LoginComponent extends Component {
   constructor(props) {
     super();
     this.onLogin = this.onLogin.bind(this)
     this.state = {
+        isLogin: false,
         login: {
             email: "",
             password: "",
@@ -15,14 +18,20 @@ export default class LoginComponent extends Component {
     }
 }
 
+    saveSuccess(data) {
+        if (data.success == 0) {
+            this.props.isLogin(true);
+            window.location = "/crypto"
+        }
+    }
     onLogin(event) {
         event.preventDefault()
         this.state.login.email = event.target.email.value
         this.state.login.password = event.target.password.value
         let user = {
-            "email": "nico@nico.fr",
-            "password": "azerty"
-        };
+			email: this.state.login.email,
+			password: this.state.login.password
+		};
 		console.log(user);
 		fetch('http://localhost:3000/api/users/login', {
 			method: 'POST',
@@ -31,13 +40,14 @@ export default class LoginComponent extends Component {
               'Access-Control-Allow-Origin': '*'
 			},
 		    body: JSON.stringify(user)
-		}).then(res => res.json())
-		.then(data => console.log(data));
-  }
+        }).then(res => res.json())
+        .then(data => this.saveSuccess(data));
+    }
 
   render() 
   {
     return (
+    
         <Container className="login-container">
             <Row>
                 <Col xs={0} md={2} xl={4}></Col>
@@ -67,3 +77,4 @@ export default class LoginComponent extends Component {
     );
   }
 }
+

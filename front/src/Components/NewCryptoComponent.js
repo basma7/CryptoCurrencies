@@ -9,93 +9,49 @@ export default class NewCryptoComponent extends Component {
     this.onNewCrypto = this.onNewCrypto.bind(this)
     this.state = {
         crypto: {
-            email: "",
-            password: "",
+            CMID: ""
           }
     }
 }
-    onNewCrypto(event) {
-        event.preventDefault()
-        this.state.crypto.email = event.target.email.value
-        this.state.crypto.password = event.target.password.value
-        console.log(this.state.crypto)
+  onNewCrypto(event) {
+    event.preventDefault();
+    this.setState({crypto: {CMID: event.target.name.value}});
+    console.log(this.state.crypto)
+    const user = {
+      CMID: this.state.crypto.CMID,
+    };
+    console.log(user);
+    fetch('https://localhost:3000/api/crypto', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'text/plain'
+      },
+        body: JSON.stringify(crypto)
+    }).then(res => res.json())
+    .then(data => console.log(data));
   }
 
   render() 
   {
     return (
         <Container>
-            <h1 className="crypto-title">Add Crypto-Currencies</h1>
-            <Form onSubmit={this.oncrypto}>
-              <Row>
-                <Col>
-              <Form.Group controlId="name">
-                <Form.Label>Name</Form.Label>
-                <Form.Control placeholder="Enter Crypto Name" />
-              </Form.Group>
-              </Col>
-              <Col>
-              <Form.Group controlId="symbol">
-                <Form.Label>Symbol</Form.Label>
-                <Form.Control placeholder="Enter Crypto Symbol" />
-              </Form.Group>
-              </Col>
-              </Row>
-              <Row>
-              <Col>
-              <Form.Group controlId="market-cap">
-                <Form.Label>Market Cap</Form.Label>
-                <Form.Control placeholder="Enter Crypto Market Cap" />
-              </Form.Group>
-              </Col>
-              <Col>
-              <Form.Group controlId="price">
-                <Form.Label>Price</Form.Label>
-                <Form.Control placeholder="Enter Crypto Price" />
-              </Form.Group>
-              </Col>
-              </Row>
-              <Row>
-              <Col>
-              <Form.Group controlId="circulating-supply">
-                <Form.Label>Circulating Supply</Form.Label>
-                <Form.Control placeholder="Enter Crypto Circulating Supply" />
-              </Form.Group>
-              </Col>
-              <Col>
-              <Form.Group controlId="volume">
-                <Form.Label>Volume (24h)</Form.Label>
-                <Form.Control placeholder="Enter Crypto Volume (24h)" />
-              </Form.Group>
-              </Col>
-              </Row>
-              <Row>
-              <Col>
-              <Form.Group controlId="1h">
-                <Form.Label>% 1h</Form.Label>
-                <Form.Control placeholder="Enter Crypto 1 1h" />
-              </Form.Group>
-              </Col>
-              
-              <Col>
-              <Form.Group controlId="24h">
-                <Form.Label>% 24h</Form.Label>
-                <Form.Control placeholder="Enter Crypto % 24h" />
-              </Form.Group>
-              </Col>
-              </Row>
-              <Row>
-              <Col xs={6}>
-              <Form.Group controlId="7d">
-                <Form.Label>% 7d</Form.Label>
-                <Form.Control placeholder="Enter Crypto %7d" />
-              </Form.Group>
-              </Col>
-              <Button variant="dark" type="submit" className="btn-newcrypto">
-              Add New Crypto
-              </Button>
-              </Row>
-            </Form>
+          <h2 className="crypto-title">Add Crypto-Currencies</h2>
+          <Row>
+            <Col xs={0} md={2} xl={4}></Col>
+            <Col xs={12} md={8} xl={4}>
+              <Form onSubmit={this.onNewCrypto}>
+                <Form.Group controlId="name">
+                  <Form.Label>Name</Form.Label>
+                  <Form.Control placeholder="Enter Crypto Name" />
+                </Form.Group>
+                <Button variant="dark" type="submit" className="btn-newcrypto" block>
+                   Add New Crypto
+                </Button>
+              </Form>
+            </Col>
+            <Col xs={0} md={2} xl={4}></Col>
+          </Row>
       </Container>
     );
   }

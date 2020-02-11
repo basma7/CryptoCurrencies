@@ -15,6 +15,11 @@ export default class RegisterComponent extends Component {
       } 
     }
 }
+saveSuccess(data) {
+  if (data.success == 1) {
+      window.location = "/login"
+  }
+}
   onRegister(event) {
     event.preventDefault()
     this.state.register.nickname = event.target.nickname.value
@@ -40,7 +45,7 @@ export default class RegisterComponent extends Component {
 			},
 		    body: JSON.stringify(user)
 		}).then(res => res.json())
-		.then(data => console.log(data));
+		.then(data => this.saveSuccess(data));
   }
   render() 
   {
