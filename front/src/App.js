@@ -8,8 +8,9 @@ import CryptoComponent from './Components/CryptoComponent';
 import ArticlesComponent from './Components/ArticlesComponent';
 import NewCryptoComponent from './Components/NewCryptoComponent';
 import UserCryptoComponent from './Components/UserCryptoComponent';
-import NewCryptoUserComponent from './Components/NewCryptoUserComponent';
+// import NewCryptoUserComponent from './Components/NewCryptoUserComponent';
 import DeleteCryptoComponent from './Components/DeleteCryptoComponent';
+import UserComponent from './Components/UserComponent';
 import {Navbar, Nav, Container, Row} from 'react-bootstrap';
 import { Link, Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
@@ -50,11 +51,11 @@ disconnect() {
             <Nav className="mr-auto">
               { this.state.isLogin ? 
               <div className="content">
-                <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/user/cryptos">Users Cryptos</Link>
+                <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/user">User</Link>
+                <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/cryptosUser">Users Cryptos</Link>
                 <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/cryptos">Cryptos</Link>
-                <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/user/crypto/create">Create User Crypto</Link>
+                {/* <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/cryptoCreate">Create Crypto</Link> */}
                 <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/articles">Articles</Link>
-                <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/delete-crypto">delete Crypto</Link>
                 <Link className="navbar-dark navbar-nav nav-link navbar-expand nav-right" to="/login" onClick={this.disconnect}>Disconnect</Link>
               </div>
               :
@@ -64,20 +65,25 @@ disconnect() {
               </div>
               }
               { this.state.isAdmin ?
-                <div className="content"><Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/crypto/create">Create Crypto</Link></div>
+                <div className="content">
+                  <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/cryptoCreate">Create Crypto</Link>
+                  <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/delete-crypto">delete Crypto</Link>
+                </div>
               : null
               }
             </Nav>
           </Navbar.Collapse>
         </Navbar>
         <Switch>
+          <Route path="/login" component={() => <LoginComponent /> }  />
           <Route path="/register" component={RegisterComponent}  />
-          <Route path="/user/cryptos" component={UserCryptoComponent}  />
+          <Route path="/cryptosUser" component={UserCryptoComponent}  />
           <Route path="/cryptos" component={CryptoComponent}  />
           <Route path="/articles" component={ArticlesComponent}  />
-          <Route path="/crypto/create" component={NewCryptoComponent}  />
-          <Route path="/user/crypto/create" component={NewCryptoUserComponent}  />
+          <Route path="/cryptoCreate" component={NewCryptoComponent}  />
+          <Route path="/user" component={UserComponent}  />
           <Route path="/delete-crypto" component={DeleteCryptoComponent}  />
+          {/* <Route path="/cryptoUserCreate" component={NewCryptoUserComponent}  /> */}
         </Switch>
       </Router>
 

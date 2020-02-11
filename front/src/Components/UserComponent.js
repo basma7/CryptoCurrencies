@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import './Register.css';
+import '../App.css';
+import './Register.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Form, Button, Container, Row, Col} from 'react-bootstrap';
+
+var jwtDecode = require('jwt-decode');
+
 
 export default class UserComponent extends Component {
   constructor(props) {
@@ -12,14 +16,38 @@ export default class UserComponent extends Component {
         nickname: "",
         email: "",
         password: "",
-      } 
+      },
+      user: {
+        nickname: "",
+        email: ""
+      }
     }
 }
-saveSuccess(data) {
-  if (data.success == 1) {
-      window.location = "/login"
-  }
+saveUserData(data) {
+  this.state.user.nickname = data.data.nickname;
+  this.state.user.email = data.data.email;
+  this.forceUpdate();
 }
+
+componentDidMount() {
+  var decoded = jwtDecode(localStorage.getItem('JWT'));
+  fetch('http://localhost:3000/api/users/profile/' + decoded.result.id, {
+			method: 'GET',
+			headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Authorization': 'Bearer ' + localStorage.getItem('JWT')
+			},
+		}).then(res => res.json())
+		.then(data => this.saveUserData(data));
+}
+
+
+
+saveSuccess(data) {
+  console.log(data);
+}
+
   onRegister(event) {
     event.preventDefault()
     this.state.register.nickname = event.target.nickname.value
@@ -36,12 +64,12 @@ saveSuccess(data) {
 		  	password: this.state.register.password
       };
     }
-		console.log(user);
-		fetch('http://localhost:3000/api/users/register', {
+		fetch('http://localhost:3000/api/users/profile', {
 			method: 'POST',
 			headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': '*',
+        'Authorization': 'Bearer ' + localStorage.getItem('JWT')
 			},
 		    body: JSON.stringify(user)
 		}).then(res => res.json())
@@ -51,10 +79,16 @@ saveSuccess(data) {
   {
     return (
         <Container className="login-container">
+
           <Row>
             <Col xs={0} md={2} xl={4}></Col>
             <Col xs={12} md={8} xl={4}>
-              <h1 className="register-title">Register</h1>
+              <h1 className="title">User Profile</h1>
+              <h3 className="margin">Nickname: {this.state.user.nickname}</h3>
+              <h3 className="margin">Email: {this.state.user.email}</h3>
+              <br/>
+              <br/>
+              <br/>
               <Form onSubmit={this.onRegister}>
 
                   <Form.Group controlId="nickname">
@@ -65,9 +99,6 @@ saveSuccess(data) {
                   <Form.Group controlId="email">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control type="email" placeholder="Enter Email" />
-                    <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
-                    </Form.Text>
                   </Form.Group>
               
                   <Form.Group controlId="password">
@@ -75,7 +106,7 @@ saveSuccess(data) {
                     <Form.Control type="password" placeholder="Password" />
                   </Form.Group>
                   <Button variant="dark" type="submit">
-                  Register
+                  Update Profile
                   </Button>
               </Form>
             </Col>

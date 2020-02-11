@@ -8,26 +8,25 @@ export default class NewCryptoComponent extends Component {
     super();
     this.onNewCrypto = this.onNewCrypto.bind(this)
     this.state = {
-        crypto: {
-            CMID: ""
-          }
+      CMID: ""
     }
 }
   onNewCrypto(event) {
     event.preventDefault();
-    this.setState({crypto: {CMID: event.target.name.value}});
-    console.log(this.state.crypto)
+    console.log(event.target.name.value)
+    this.state.CMID = event.target.name.value;
+    console.log(this.state.CMID)
     const user = {
-      CMID: this.state.crypto.CMID,
+      CMID: this.state.CMID,
     };
     console.log(user);
-    fetch('https://localhost:3000/api/crypto', {
+    fetch('http://localhost:3000/api/users/cryptos', {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'text/plain'
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('JWT')
       },
-        body: JSON.stringify(crypto)
+        body: JSON.stringify(user)
     }).then(res => res.json())
     .then(data => console.log(data));
   }

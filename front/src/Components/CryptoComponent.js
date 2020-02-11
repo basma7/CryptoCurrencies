@@ -87,14 +87,14 @@ export default class CryptoComponent extends Component {
         let tmpObj = {};
         tmpObj["symbol"] = rawKeys[i];
         tmpObj["name"] = moneyEquiv[rawKeys[i]];
-        tmpObj["price"] = currency.EUR.PRICE;
-        tmpObj["volumeday"] = currency.EUR.VOLUMEDAY;
-        tmpObj["volume24h"] = currency.EUR.VOLUME24HOUR;
-        tmpObj["lowday"] = currency.EUR.LOWDAY;
-        tmpObj["highday"] = currency.EUR.HIGHDAY;
-        tmpObj["supply"] = currency.EUR.SUPPLY;
-        tmpObj["marketcap"] = currency.EUR.MKTCAP;
-        tmpObj["totalvolume24h"] = currency.EUR.TOTALVOLUME24H;
+        tmpObj["price"] = parseFloat(currency.EUR.PRICE).toFixed(2);
+        tmpObj["volumeday"] = parseFloat(currency.EUR.VOLUMEDAY).toFixed(2);
+        tmpObj["volume24h"] = parseFloat(currency.EUR.VOLUME24HOUR).toFixed(2);
+        tmpObj["lowday"] = parseFloat(currency.EUR.LOWDAY).toFixed(2);
+        tmpObj["highday"] = parseFloat(currency.EUR.HIGHDAY).toFixed(2);
+        tmpObj["supply"] = parseFloat(currency.EUR.SUPPLY).toFixed(2);
+        tmpObj["marketcap"] = parseFloat(currency.EUR.MKTCAP).toFixed(2);
+        tmpObj["totalvolume24h"] = parseFloat(currency.EUR.TOTALVOLUME24H).toFixed(2);
         tmpObj["id"] = i++;
         console.log(tmpObj);
         this.setState(state => {
@@ -111,15 +111,15 @@ export default class CryptoComponent extends Component {
   render() 
   {
     return (
-      <Container>
+      <Container fluid={true}>
         <h2 className="crypto-title">List currencies</h2>
         <Row>
-          <Col xs={0} md={1}></Col>
-          <Col xs={12} md={10}>
+          <Col xs={0} md={0}></Col>
+          <Col xs={12} md={12}>
             <BootstrapTable keyField='id' data={ this.state.list } columns={ this.state.columns }
               striped={true} hover={true}/>
           </Col>
-          <Col xs={0} md={1}></Col>
+          <Col xs={0} md={0}></Col>
         </Row>
       </Container>
     );
