@@ -9,8 +9,6 @@ export default class ArticlesComponent extends Component {
     this.onArticles = this.onArticles.bind(this)
     this.state = {
         article: {
-            email: "",
-            password: "",
           }
     }
 }

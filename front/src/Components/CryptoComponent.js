@@ -88,13 +88,13 @@ export default class CryptoComponent extends Component {
         tmpObj["symbol"] = rawKeys[i];
         tmpObj["name"] = moneyEquiv[rawKeys[i]];
         tmpObj["price"] = currency.EUR.PRICE;
-        tmpObj["volumeday"] = currency.EUR.PRICE;
-        tmpObj["volume24h"] = currency.EUR.PRICE;
-        tmpObj["lowday"] = currency.EUR.PRICE;
-        tmpObj["highday"] = currency.EUR.PRICE;
-        tmpObj["supply"] = currency.EUR.PRICE;
-        tmpObj["marketcap"] = currency.EUR.PRICE;
-        tmpObj["totalvolume24h"] = currency.EUR.PRICE;
+        tmpObj["volumeday"] = currency.EUR.VOLUMEDAY;
+        tmpObj["volume24h"] = currency.EUR.VOLUME24HOUR;
+        tmpObj["lowday"] = currency.EUR.LOWDAY;
+        tmpObj["highday"] = currency.EUR.HIGHDAY;
+        tmpObj["supply"] = currency.EUR.SUPPLY;
+        tmpObj["marketcap"] = currency.EUR.MKTCAP;
+        tmpObj["totalvolume24h"] = currency.EUR.TOTALVOLUME24H;
         tmpObj["id"] = i++;
         console.log(tmpObj);
         this.setState(state => {
