@@ -9,7 +9,6 @@ import ArticlesComponent from './Components/ArticlesComponent';
 import NewCryptoComponent from './Components/NewCryptoComponent';
 import UserCryptoComponent from './Components/UserCryptoComponent';
 import NewCryptoUserComponent from './Components/NewCryptoUserComponent';
-import DeleteUserComponent from './Components/DeleteUserComponent';
 import DeleteCryptoComponent from './Components/DeleteCryptoComponent';
 import {Navbar, Nav, Container, Row} from 'react-bootstrap';
 import { Link, Route, BrowserRouter as Router, Switch } from 'react-router-dom';
@@ -55,6 +54,7 @@ disconnect() {
                 <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/cryptos">Cryptos</Link>
                 <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/user/crypto/create">Create User Crypto</Link>
                 <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/articles">Articles</Link>
+                <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/delete-crypto">delete Crypto</Link>
                 <Link className="navbar-dark navbar-nav nav-link navbar-expand nav-right" to="/login" onClick={this.disconnect}>Disconnect</Link>
               </div>
               :
@@ -71,16 +71,13 @@ disconnect() {
           </Navbar.Collapse>
         </Navbar>
         <Switch>
-          <Route path="/user" component={UserComponent}  />
-          <Route path="/login" component={() => <LoginComponent /> }  />
           <Route path="/register" component={RegisterComponent}  />
           <Route path="/user/cryptos" component={UserCryptoComponent}  />
           <Route path="/cryptos" component={CryptoComponent}  />
           <Route path="/articles" component={ArticlesComponent}  />
           <Route path="/crypto/create" component={NewCryptoComponent}  />
           <Route path="/user/crypto/create" component={NewCryptoUserComponent}  />
-          <Route path="/delete/cryptos" component={DeleteCryptoComponent}  />
-          <Route path="/delete/users" component={DeleteUserComponent}  />
+          <Route path="/delete-crypto" component={DeleteCryptoComponent}  />
         </Switch>
       </Router>
 

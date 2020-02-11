@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Crypto.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Row, Col, Container} from 'react-bootstrap';
+import {Form, Button, Row, Col, Container} from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
@@ -13,60 +13,20 @@ let moneyEquiv = {
 export default class DeleteCryptoComponent extends Component {
   constructor(props) {
     super();
+    this.deleteCurrency = this.deleteCurrency.bind(this);
     this.state = {
       list: [],
       columns: [
         {
+          dataField: 'id',
+          text: 'Currency ID',
+          sort: true
+        },
+        {
           dataField: 'symbol',
           text: 'Currency Symbol',
           sort: true
-        },
-        {
-          dataField: 'name',
-          text: 'Currency Name',
-          sort: true
-        },
-        {
-          dataField: 'price',
-          text: 'Currency Unit value',
-          sort: true
-        },
-        {
-          dataField: 'volumeday',
-          text: 'Volume Day',
-          sort: true
-        },
-        {
-          dataField: 'volume24h',
-          text: 'Volume 24h',
-          sort: true
-        },
-        {
-          dataField: 'lowday',
-          text: 'Low Day',
-          sort: true
-        },
-        {
-          dataField: 'highday',
-          text: 'High Day',
-          sort: true
-        },
-        {
-          dataField: 'supply',
-          text: 'Supply',
-          sort: true
-        },
-        {
-          dataField: 'marketcap',
-          text: 'Market Cap',
-          sort: true
-        },
-        {
-          dataField: 'totalvolume24h',
-          text: 'Total Volume 24h',
-          sort: true
         }
-      
       ]
     };
     fetch('http://localhost:3000/api/users/cryptos/cmids', {
@@ -83,41 +43,56 @@ export default class DeleteCryptoComponent extends Component {
       let rawKeys = Object.keys(raw);
       console.log("data  :" , data);
       let i = 0;
+      let tmpList = [];
       for (let currency of Object.values(raw)) {
         let tmpObj = {};
         tmpObj["symbol"] = rawKeys[i];
-        tmpObj["name"] = moneyEquiv[rawKeys[i]];
-        tmpObj["price"] = currency.EUR.PRICE;
-        tmpObj["volumeday"] = currency.EUR.PRICE;
-        tmpObj["volume24h"] = currency.EUR.PRICE;
-        tmpObj["lowday"] = currency.EUR.PRICE;
-        tmpObj["highday"] = currency.EUR.PRICE;
-        tmpObj["supply"] = currency.EUR.PRICE;
-        tmpObj["marketcap"] = currency.EUR.PRICE;
-        tmpObj["totalvolume24h"] = currency.EUR.PRICE;
         tmpObj["id"] = i++;
         console.log(tmpObj);
-        this.setState(state => {
-          const list = state.list.concat([tmpObj]);
-          return {
-            list
-          };
-        });
-        console.log(this.state.list);
+        tmpList.push(tmpObj);
       }
+      console.log("tmpList : ", tmpList);
+      this.state.list = tmpList;
+      console.log(this.state.list);
     });
+  }
+
+  deleteCurrency(event) {
+    event.preventDefault();
+    let tmp = this.state.list;
+    console.log("tmp : ", tmp);
+    let cur = tmp[event.currentTarget.del.value].symbol;
+    console.log(cur);
+    fetch('http://localhost:3000/api/cryptos/delete', {
+      method: 'POST',
+      headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*'
+      },
+        body: JSON.stringify({CMID: cur})
+      }).then(res => res.json())
+      .then(data => this.saveSuccess(data));
+
   }
 
   render() 
   {
     return (
       <Container>
-        <h2 className="crypto-title">List currencies</h2>
+        <h2 className="crypto-title">Delete currencies</h2>
         <Row>
           <Col xs={0} md={1}></Col>
           <Col xs={12} md={10}>
             <BootstrapTable keyField='id' data={ this.state.list } columns={ this.state.columns }
               striped={true} hover={true}/>
+            <Form onSubmit={this.deleteCurrency}>
+              <Form.Group controlId="del">
+              <Form.Control type="text" placeholder="Currency ID" />
+              </Form.Group>
+              <Button variant="dark" type="submit">
+                Supprimer
+              </Button>
+                    </Form>
           </Col>
           <Col xs={0} md={1}></Col>
         </Row>
