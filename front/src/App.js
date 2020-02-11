@@ -18,8 +18,8 @@ class App extends Component {
     this.isLogged = this.isLogged.bind(this)
     this.isAdmin = this.isAdmin.bind(this)
     this.state = {
-        isLogin: false,
-        isAdmin: false
+        isLogin: true,
+        isAdmin: true
     }
 }
 isLogged(isLogin) {
@@ -61,8 +61,8 @@ isAdmin(isAdmin) {
         <Switch>
           <Route path="/login" component={() => <LoginComponent isLogin={this.isLogged} isAdmin={this.isAdmin} /> }  />
           <Route path="/register" component={RegisterComponent}  />
-          <Route path="/user/crypto" component={UserCryptoComponent}  />
-          <Route path="/crypto" component={CryptoComponent}  />
+          <Route path="/user/cryptos" component={UserCryptoComponent}  />
+          <Route path="/cryptos" component={CryptoComponent}  />
           <Route path="/articles" component={ArticlesComponent}  />
           <Route path="/crypto/create" component={NewCryptoComponent}  />
           <Route path="/user/crypto/create" component={NewCryptoUserComponent}  />
