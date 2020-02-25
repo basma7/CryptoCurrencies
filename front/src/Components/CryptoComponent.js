@@ -78,19 +78,24 @@ export default class CryptoComponent extends Component {
       
       ]
     };
-    fetch('http://localhost:3000/api/users/cryptos/getCM', {
+    console.log(localStorage.getItem('JWT'));
+    fetch('http://localhost:3000/api/users/cryptos/cmids', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'text/plain'
+        'Content-Type': 'text/plain',
+        'Authorization': 'Bearer ' + localStorage.getItem('JWT')
       },
     }).then(res => res.json())
     .then(data => {
       console.log(data);
+      if (data.success == 1) {
       let raw = data.data.RAW;
       let display = data.DISPLAY;
-      let rawKeys = Object.keys(raw);
-      console.log("data  :" , data);
+      let rawKeys;
+      if (raw) {
+        rawKeys = Object.keys(raw);
+        console.log("data  :" , data);
       let i = 0;
       for (let currency of Object.values(raw)) {
         let tmpObj = {};
@@ -113,7 +118,9 @@ export default class CryptoComponent extends Component {
           };
         });
         console.log(this.state.list);
+        }
       }
+      }  
     });
   }
 

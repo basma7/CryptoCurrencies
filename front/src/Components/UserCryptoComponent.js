@@ -90,6 +90,7 @@ export default class UserCryptoComponent extends Component {
       console.log(data);
       let raw = data.data.RAW;
       let display = data.DISPLAY;
+      if (raw) {
       let rawKeys = Object.keys(raw);
       console.log("data  :" , data);
       let i = 0;
@@ -115,6 +116,7 @@ export default class UserCryptoComponent extends Component {
         });
         console.log(this.state.list);
       }
+    }
     });
   }
 

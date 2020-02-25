@@ -23,12 +23,12 @@ export default class LoginComponent extends Component {
         console.log(data);
         if (data.success == 1) {
             localStorage.setItem('isLogin', true);
-            window.location = "/cryptos"
             var decoded = jwtDecode(data.token);
             localStorage.setItem('JWT', data.token);
             if (decoded.result.admin == "1") {
                 localStorage.setItem('isAdmin', true);
             }
+            window.location = "/cryptos"
         }
     }
     onLogin(event) {

@@ -8,7 +8,7 @@ import CryptoComponent from './Components/CryptoComponent';
 import ArticlesComponent from './Components/ArticlesComponent';
 import NewCryptoComponent from './Components/NewCryptoComponent';
 import UserCryptoComponent from './Components/UserCryptoComponent';
-// import NewCryptoUserComponent from './Components/NewCryptoUserComponent';
+import NewUserCryptoComponent from './Components/NewUserCryptoComponent';
 import DeleteCryptoComponent from './Components/DeleteCryptoComponent';
 import UserComponent from './Components/UserComponent';
 import {Navbar, Nav, Container, Row} from 'react-bootstrap';
@@ -37,8 +37,10 @@ isAdmin(isAdmin) {
   this.setState({isAdmin})
 }
 disconnect() {
-  localStorage.removeItem('isLogin');
-  localStorage.removeItem('isAdmin');
+  localStorage.setItem('isLogin', false);
+  localStorage.setItem('isAdmin', false);
+  this.isAdmin(false);
+  this.isLogin(false);
 }
   render() {
     return (
@@ -54,9 +56,9 @@ disconnect() {
                 <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/user">User</Link>
                 <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/cryptosUser">Users Cryptos</Link>
                 <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/cryptos">Cryptos</Link>
-                {/* <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/cryptoCreate">Create Crypto</Link> */}
+                <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/cryptoUserCreate">Add your Own Crypto</Link>
                 <Link className="navbar-dark navbar-nav nav-link navbar-expand text-center" to="/articles">Articles</Link>
-                <Link className="navbar-dark navbar-nav nav-link navbar-expand nav-right" to="/login" onClick={this.disconnect}>Disconnect</Link>
+                <Link className="navbar-dark navbar-nav nav-link navbar-expand nav-right" to="/login" onClick={() => this.disconnect()}>Disconnect</Link>
               </div>
               :
               <div className="content">
@@ -81,6 +83,7 @@ disconnect() {
           <Route path="/cryptos" component={CryptoComponent}  />
           <Route path="/articles" component={ArticlesComponent}  />
           <Route path="/cryptoCreate" component={NewCryptoComponent}  />
+          <Route path="/cryptoUserCreate" component={NewUserCryptoComponent}  />
           <Route path="/user" component={UserComponent}  />
           <Route path="/delete-crypto" component={DeleteCryptoComponent}  />
           {/* <Route path="/cryptoUserCreate" component={NewCryptoUserComponent}  /> */}

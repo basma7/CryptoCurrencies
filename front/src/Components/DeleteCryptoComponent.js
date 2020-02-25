@@ -42,13 +42,16 @@ export default class DeleteCryptoComponent extends Component {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'text/plain'
+        'Content-Type': 'text/plain',
+        'Authorization': 'Bearer ' + localStorage.getItem('JWT')
       },
     }).then(res => res.json())
     .then(data => {
       console.log(data);
+      if (data.success == 1) {
       let raw = data.data.RAW;
       let display = data.DISPLAY;
+      if (raw) {
       let rawKeys = Object.keys(raw);
       console.log("data  :" , data);
       let i = 0;
@@ -61,8 +64,11 @@ export default class DeleteCryptoComponent extends Component {
         tmpList.push(tmpObj);
       }
       console.log("tmpList : ", tmpList);
-      this.state.list = tmpList;
+      this.setState({list: tmpList});
+      //this.state.list = tmpList;
       console.log(this.state.list);
+      }
+    }
     });
   }
 
@@ -70,18 +76,20 @@ export default class DeleteCryptoComponent extends Component {
     event.preventDefault();
     let tmp = this.state.list;
     console.log("tmp : ", tmp);
-    let cur = tmp[event.currentTarget.del.value].symbol;
+    console.log("event :", tmp[event.currentTarget.del.value])
+    let cur = tmp[event.currentTarget.del.value].id;
     console.log(cur);
-    fetch('http://localhost:3000/api/cryptos/delete', {
-      method: 'POST',
+    fetch('http://localhost:3000/api/users/', {
+      method: 'DELETE',
       headers: {
               'Content-Type': 'application/json',
-              'Access-Control-Allow-Origin': '*'
+              'Access-Control-Allow-Origin': '*',
+              'Authorization': 'Bearer ' + localStorage.getItem('JWT')
       },
-        body: JSON.stringify({CMID: cur})
+        body: JSON.stringify({"id": cur})
       }).then(res => res.json())
       .then(data => this.saveSuccess(data));
-
+    this.forceUpdate();
   }
 
   render() 
