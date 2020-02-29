@@ -6,3 +6,8 @@
 .article-container {
   margin: 20% 20%;
 }
+
+.cardText {
+	max-height: 200px;
+	text-overflow: ellipsis;
+}

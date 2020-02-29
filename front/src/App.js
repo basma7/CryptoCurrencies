@@ -20,14 +20,14 @@ class App extends Component {
     this.isLogin = this.isLogin.bind(this)
     this.isAdmin = this.isAdmin.bind(this)
     this.state = {
-        isLogin: false,
-        isAdmin: false
+        isLogin: true,
+        isAdmin: true
     }
 }
-async componentDidMount() {
+/*async componentDidMount() {
   this.setState({isLogin: localStorage.getItem("isLogin")});
   this.setState({isAdmin: localStorage.getItem("isAdmin")});
-}
+}*/
 
 isLogin(isLogin) {
   this.setState({isLogin})

@@ -8,22 +8,41 @@ export default class ArticlesComponent extends Component {
     super();
     this.onArticles = this.onArticles.bind(this)
     this.state = {
-        article: {
-          }
-    }
-}
-    onArticles(event) {
-        event.preventDefault()
-        this.state.article.email = event.target.email.value
-        this.state.article.password = event.target.password.value
-        console.log(this.state.article)
+        article: []
+    };
+    fetch('http://localhost:3000/api/users/articles', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'text/plain'
+      },
+    }).then(res => res.json())
+    .then(data => {
+      this.setState({article: data});
+    });
   }
 
   render() 
   {
+    var items = this.state.article;
+    var listItems = items.map(function(d, idx){
+      return (
+        <Card style={{ width: '18rem' }}>
+          <Card.Img variant="top" src="{d.imageurl}" />
+          <Card.Body>
+            <Card.Title>{d.categories}</Card.Title>
+            <Card.Text className="cardText">
+              {d.body}
+            </Card.Text>
+            <a href="{d.url}"<Button variant="primary">More infos</Button>
+          </Card.Body>
+        </Card>
+      )
+    });
     return (
       <Container className="article-container">
-          
+      <div class="container"
+          {listItems}
       </Container>
     );
   }

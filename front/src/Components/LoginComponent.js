@@ -14,7 +14,7 @@ export default class LoginComponent extends Component {
         isLogin: false,
         login: {
             email: "",
-            password: "",
+            password: ""
           }
     }
 }

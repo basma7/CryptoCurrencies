@@ -20,7 +20,7 @@ export default class NewUserCryptoComponent extends Component {
       CMID: this.state.CMID,
     };
     console.log(user);
-    fetch('http://localhost:3000/api/users/cryptos', {
+    fetch('http://localhost:3000/api/users/addCryptopre', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

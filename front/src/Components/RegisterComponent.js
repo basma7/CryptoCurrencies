@@ -11,7 +11,7 @@ export default class RegisterComponent extends Component {
       register: {
         nickname: "",
         email: "",
-        password: "",
+        password: ""
       } 
     }
 }
