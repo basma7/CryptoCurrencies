@@ -23,6 +23,7 @@ module.exports = {
       });
     });
   },
+
   getCMID: (req, res) => {
     getCMID((err, results) => {
       if (err) {
@@ -82,7 +83,7 @@ module.exports = {
         console.log(err);
         return;
       }
-      if (!results) {
+      if (results) {
         return res.json({
           success: 0,
           message: "Record Not Found"

@@ -73,10 +73,10 @@ module.exports = {
       }
     );
   },
-  deleteUser: (cmid, callBack) => {
+  deleteUser: (id, callBack) => {
     pool.query(
-      `delete from user where cmid = ?`,
-      [cmid],
+      `delete from user where id = ?`,
+      [id],
       (error, results, fields) => {
         if (error) {
           callBack(error);
