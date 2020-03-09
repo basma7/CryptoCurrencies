@@ -79,11 +79,12 @@ export default class UserCryptoComponent extends Component {
       
       ]
     };
-    fetch('http://localhost:3000/api/users/cryptos/getCryptopre', {
+    fetch('http://localhost:3000/api/users/getCryptopre', {
       method: 'GET',
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'text/plain'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Authorization': 'Bearer ' + localStorage.getItem('JWT')
       },
     }).then(res => res.json())
     .then(data => {

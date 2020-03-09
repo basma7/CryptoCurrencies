@@ -24,6 +24,7 @@ export default class UserComponent extends Component {
     }
 }
 saveUserData(data) {
+  console.log(data);
   this.state.user.nickname = data.data.nickname;
   this.state.user.email = data.data.email;
   this.forceUpdate();
@@ -46,6 +47,16 @@ componentDidMount() {
 
 saveSuccess(data) {
   console.log(data);
+  var decoded = jwtDecode(localStorage.getItem('JWT'));
+  fetch('http://localhost:3000/api/users/profile/' + decoded.result.id, {
+			method: 'GET',
+			headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Authorization': 'Bearer ' + localStorage.getItem('JWT')
+			},
+		}).then(res => res.json())
+		.then(data => this.saveUserData(data));
 }
 
   onRegister(event) {

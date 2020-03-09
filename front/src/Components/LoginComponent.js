@@ -25,9 +25,16 @@ export default class LoginComponent extends Component {
             localStorage.setItem('isLogin', true);
             var decoded = jwtDecode(data.token);
             localStorage.setItem('JWT', data.token);
-            if (decoded.result.admin == "1") {
+            console.log(decoded.result.admin);
+            if (decoded.result.admin == 1) {
                 localStorage.setItem('isAdmin', true);
+                this.props.isAdmin(true);
             }
+            else {
+                localStorage.setItem('isAdmin', false);
+                this.props.isAdmin(false);
+            }
+            
             window.location = "/cryptos"
         }
     }

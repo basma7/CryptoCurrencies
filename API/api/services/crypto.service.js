@@ -15,9 +15,7 @@ module.exports = {
     );
   },
   getCMID: callBack => {
-    pool.query(
-      `select CMID from crypto`,
-       (error, results, fields) => {
+    pool.query(`select CMID from crypto`, [], (error, results, fields) => {
       if (error) {
         callBack(error);
       }
@@ -28,9 +26,9 @@ module.exports = {
     const currencies = "USD,EUR";
     // const cryptoSymbols = "BTC,ETH,XRP,LTC";
     const options = {
-      // https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC&tsyms=EUR
+      //  min-api.cryptocompare.com/data/coin/generalinfo?fsyms=BTC,MLN,DASH&tsym=USD
       hostname: "min-api.cryptocompare.com",
-      path: `/data/pricemultifull?fsyms=${cmid}&tsyms=${currencies}`
+      path: `/data/coin/generalinfo?fsyms=${cmid}&tsym=${currencies}`
     };
     https
       .get(options, res => {
@@ -89,6 +87,7 @@ module.exports = {
       .on("error", err => {
         console.log(`Request failed, ${err.message}`);
       });
+
   },
   deleteCrypto: (cmid, callBack) => {
     pool.query(
@@ -101,5 +100,5 @@ module.exports = {
         return callBack(null, results[0]);
       }
     );
-  }
+  },
 };

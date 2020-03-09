@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const { checkToken } = require("../../auth/token.validation");
-const { checkAdmin } = require("../../authorize/authorize");
 const {
   createUser,
   createAdmin,
@@ -12,24 +11,19 @@ const {
 } = require("../controllers/user.controller");
 
 //Get All users
-router.get("/", checkAdmin, getUsers);
-
+router.get("/", checkToken, getUsers);
 //register
 router.post("/register", createUser);
-
 //register
-router.post("/createAdmin", checkAdmin, createAdmin);
-
+router.post("/createAdmin", createAdmin); //check he's admin
 //Login
 router.post("/login", login);
-
 //Update
 router.patch("/profile", checkToken, updateUsers);
-
 //get User profile
 router.get("/profile/:id", checkToken, getUserByUserId);
 
 //delete All users
-router.delete("/", checkAdmin, deleteUser);
+router.delete("/", deleteUser);
 
 module.exports = router;

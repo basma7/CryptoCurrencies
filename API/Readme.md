@@ -11,11 +11,12 @@
 
     The REST API of the CryptoCurrencies Application.
 
-**Get all the Users**
+**Get all the User**
 ----
-  Returns json data about all the users.
+  Returns json data about a all the users.
 
 * **URL**
+
   /
 
 * **Method:**
@@ -26,11 +27,11 @@
 
    **Required:**
  
-   `Token=[String]`
+   None
 
 * **Data Params**
-  
-  None
+
+`Token=[String]`
    
 * **Success Response:**
 
@@ -46,6 +47,9 @@
 
   * **Code:** 401 UNAUTHORIZED <br />
     **Content:** `{"success": 0, "message": "Access Denied! Unauthorized User" }`
+
+* **Sample Call:**
+  ```  ``` 
 
 **Get an User by his ID**
 ----
@@ -64,11 +68,10 @@
    **Required:**
  
 `id=[Integer]`
-`Token=[String]`
 
 * **Data Params**
-  
-  None
+
+`Token=[String]`
 
 * **Success Response:**
 
@@ -107,16 +110,16 @@
    **Required:**
  
 `{"id": 10 }`
-`Token=[String]`
 
 * **Data Params**
 
-   None
+`Token=[String]`
+   
 
 * **Success Response:**
 
   * **Code:** 200 <br />
-    **Content:** `{ }`
+    **Content:** `{ },`
  
 * **Error Response:**
 
@@ -241,7 +244,7 @@ None
   * **Code:** 200 Not found <br />
     **Content:** `{"success": 0,"data": "Sorry, it's invalid email or password"}`
 
-######################################################################################
+###########################################
 
 **Get all the CMID**
 ----
@@ -256,14 +259,12 @@ None
   `GET`
   
 *  **URL Params**
-  
-  * **Required:**
 
-    `Token=[String]`
-
+   **Required:**
+    None
 * **Data Params**
 
-    None
+    `Token=[String]`
 
 * **Success Response:**
 
@@ -276,9 +277,9 @@ None
     **Content:** `{"success": 0,"data": "Sorry, it's invalid email or password"}`
     
 
-**Get all the informations**
+**Get all the **
 ----
-  Get all the informations about a list of crypto currency
+  Get all the crypto code added by the Admins
 
 * **URL**
     /crypto/[?cmids={cm}]
@@ -290,12 +291,10 @@ None
 *  **URL Params**
 
    **Required:**
-
-    `Token=[String]`
-
+    None
 * **Data Params**
 
-    None
+    `Token=[String]`
 
 * **Success Response:**
 
@@ -341,239 +340,18 @@ None
                   `  ]`
                ` }`
           `  },`
-
-  * **For more informations:** please check the API Documentation https://min-api.cryptocompare.com/documentation
-
+ 
 * **Error Response:**
 *  **code:** 200
-`{    "success": 1,    "data": {"Response": "Error","Message": "There is no data for any of the toSymbol/s HY .",`
-`        "HasWarning": true,`
-`        "Type": 2,`
-`        "RateLimit": {},`
-`        "Data": {},`
-`        "Warning": "There is no data for the toSymbol/s HY ",`
-`        "ParamWithError": "fsyms"`
-`    }`
-`}`
+{    "success": 1,    "data": {"Response": "Error","Message": "There is no data for any of the toSymbol/s HY .",
+        "HasWarning": true,
+        "Type": 2,
+        "RateLimit": {},
+        "Data": {},
+        "Warning": "There is no data for the toSymbol/s HY ",
+        "ParamWithError": "fsyms"
+    }
+}
   * **Code:** 200 Not found <br />
-    **Content:** `{"success": 0,"data": "Error"}`
-
-**Delete a cryptoCurrencies**
-----
-  delete a the crypto Currency code
-
-* **URL**
-
-  /cryptos
-
-* **Method:**
-
-  `DELETE`
-  
-*  **URL Params**
-  
-  * **Required:**
-
-    `Token=[String]`
-
-* **Data Params**
-
-    None
-
-* **Success Response:**
-
-  * **Code:** 200 <br />
-    **Content:** `{"success": 1, "data": }`
- 
-* **Error Response:**
-
-  * **Code:** 200 NOT FOUND <br />
-    **Content:** `{ "success": 0, "message": "Invalid Token..."}`
-
-  OR
-
-  * **Code:** 401 UNAUTHORIZED <br />
-    **Content:** `{"success": 0, "message": "Access Denied! Unauthorized User" }`
-
-  OR
-
-  * **Code:** 200 Not found <br />
-    **Content:** `{ "success": 0, "message": "Record not Found" }`
+    **Content:** `{"success": 0,"data": "Sorry, it's invalid email or password"}`
     
- 
-**Add a new crypto currency code**
-----
-  Crete a new crypto currency code
-
-* **URL**
-
-  /cryptos
-
-* **Method:**
-
-  `POST`
-  
-*  **URL Params**
-
-   **Required:**
- 
-  `{	"CMID": "LTC",	"go": 0 }`
-  `Token=[String]`
-
-
-* **Data Params**
-
-  None 
-
-* **Success Response:**
-
-  * **Code:** 200 <br />
-    **Content:** `{"success": 1,"data": {"fieldCount": 0, "affectedRows": 1, "insertId": 15, "serverStatus": 2,"warningCount": 0, "message": "", "protocol41": true, "changedRows": 0}}`
- 
-* **Error Response:**
-
-  * **Code:** 200 NOT FOUND <br />
-    **Content:** `{ "success": 0, "message": "Invalid Token..."}`
-
-  OR
-
-  * **Code:** 401 UNAUTHORIZED <br />
-    **Content:** `{"success": 0, "message": "Access Denied! Unauthorized User" }`
-
-  OR
-
-  * **Code:** 200 Not found <br />
-    **Content:** `{ "success": 0, "message": "Record not Found" }`
-   
-
-   Articles
-
-**Get all the informations**
-----
-  Get all the informations about a list of crypto currency
-
-* **URL**
-* 
-    /articles
-
-* **Method:**
-
-  `GET`
-  
-*  **URL Params**
-
-   **Required:**
-
-    `Token=[String]`
-
-* **Data Params**
-
-   `lang=EN`
-
-* **Success Response:**
-
-  * **Code:** 200 
-    **Content:** `{}`
-
-  * **For more informations:** please check the API Documentation https://min-api.cryptocompare.com/documentation
-
-* **Error Response:**
-*  **code:** 200
-`{    "success": 1,    "data": {"Response": "Error","Message": "There is no data for any of the toSymbol/s HY .",`
-`        "HasWarning": true,`
-`        "Type": 2,`
-`        "RateLimit": {},`
-`        "Data": {},`
-`        "Warning": "There is no data for the toSymbol/s HY ",`
-`        "ParamWithError": "fsyms"`
-`    }`
-`}`
-  * **Code:** 200 Not found <br />
-    **Content:** `{"success": 0,"data": "Error"}`
-
-
-
-**Delete a cryptoCurrencie from prefrences liste**
-----
-  delete a the crypto Currency code from prefrences liste of a user with their ID
-
-* **URL**
-
-  /addCryptopre
-
-* **Method:**
-
-  `DELETE`
-  
-*  **URL Params**
-  
-  * **Required:**
-
-    `Token=[String]`
-
-* **Data Params**
-
-    None
-
-* **Success Response:**
-
-  * **Code:** 200 <br />
-    **Content:** `{"success": 1, "data":{`
-       ` "fieldCount": 0,`
-       ` "affectedRows": 1,`
-       ` "insertId": 56,`
-       ` "serverStatus": 2,`
-       ` "warningCount": 0,`
-       ` "message": "",`
-       ` "protocol41": true,`
-       ` "changedRows": 0`
-   `} }`
- 
-* **Error Response:**
-
-  * **Code:** 200 NOT FOUND <br />
-    **Content:** `{ "success": 0, "message": "Invalid Token..."}`
-
-  OR
-
-  * **Code:** 401 UNAUTHORIZED <br />
-    **Content:** `{"success": 0, "message": "Access Denied! Unauthorized User" }`
-
-  OR
-
-  * **Code:** 200 Not found <br />
-    **Content:** `{ "success": 0, "message": "Record not Found" }`
-    
-
-**Add Favorite crypto currency to prefrences liste of an user**
-----
-  Crete a new crypto currency.
-
-* **URL**
-
-  /addCryptopre
-
-* **Method:**
-
-  `POST`
-  
-*  **URL Params**
-
-   **Required:**
- 
-  `{"CMID": "RTX"}`
-
-* **Data Params**
-
-  None 
-
-* **Success Response:**
-
-  * **Code:** 200 <br />
-    **Content:** `{"success": 1,"data": {"fieldCount": 0, "affectedRows": 1, "insertId": 15, "serverStatus": 2,"warningCount": 0, "message": "", "protocol41": true, "changedRows": 0}}`
- 
-* **Error Response:**
-
-  * **Code:** 200 Not found <br />
-    **Content:** `{ "success": 0, "message": "Record not Found" }`
-  

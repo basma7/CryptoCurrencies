@@ -14,20 +14,27 @@ import UserComponent from './Components/UserComponent';
 import {Navbar, Nav, Container, Row} from 'react-bootstrap';
 import { Link, Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
+var jwtDecode = require('jwt-decode');
+
 class App extends Component {
   constructor(props) {
     super();
     this.isLogin = this.isLogin.bind(this)
     this.isAdmin = this.isAdmin.bind(this)
     this.state = {
-        isLogin: true,
-        isAdmin: true
+        isLogin: false,
+        isAdmin: false
     }
 }
-/*async componentDidMount() {
+async componentDidMount() {
   this.setState({isLogin: localStorage.getItem("isLogin")});
-  this.setState({isAdmin: localStorage.getItem("isAdmin")});
-}*/
+  if (localStorage.getItem("JWT")) {
+    var decoded = jwtDecode(localStorage.getItem("JWT"));
+    if (decoded.result.admin == 1) {
+      this.setState({isAdmin: true});
+    }
+  }
+}
 
 isLogin(isLogin) {
   this.setState({isLogin})
@@ -41,6 +48,10 @@ disconnect() {
   localStorage.setItem('isAdmin', false);
   this.isAdmin(false);
   this.isLogin(false);
+}
+
+isAdmincallback = (isAdmin) => {
+  this.setState({isAdmin});
 }
   render() {
     return (
@@ -77,7 +88,7 @@ disconnect() {
           </Navbar.Collapse>
         </Navbar>
         <Switch>
-          <Route path="/login" component={() => <LoginComponent /> }  />
+          <Route path="/login" component={() => <LoginComponent isAdmin={this.isAdmincallback}/> }  />
           <Route path="/register" component={RegisterComponent}  />
           <Route path="/cryptosUser" component={UserCryptoComponent}  />
           <Route path="/cryptos" component={CryptoComponent}  />

@@ -4,7 +4,9 @@
 }
 
 .article-container {
-  margin: 20% 20%;
+  margin-top: 5%;
+  width: 100%;
+  align-items: center;
 }
 
 .cardText {

@@ -86,7 +86,7 @@ export default class DeleteCryptoComponent extends Component {
               'Access-Control-Allow-Origin': '*',
               'Authorization': 'Bearer ' + localStorage.getItem('JWT')
       },
-        body: JSON.stringify({"id": cur})
+        body: JSON.stringify({cmid: cur})
       }).then(res => res.json())
       .then(data => this.saveSuccess(data));
     this.forceUpdate();

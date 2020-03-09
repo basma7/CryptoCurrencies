@@ -6,9 +6,9 @@ const {
 } = require("../controllers/article.controller");
 
 //Get Articles
-router.get("/articles",checkToken, getArticles);
+router.get("/articles", getArticles);
 
 //Get Article By ID
-router.get("/article/:id",checkToken, getArticle);
+router.get("/article/:id", getArticle);
 
 module.exports = router;

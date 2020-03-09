@@ -24,6 +24,7 @@ export default class NewUserCryptoComponent extends Component {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
         'Authorization': 'Bearer ' + localStorage.getItem('JWT')
       },
         body: JSON.stringify(user)
