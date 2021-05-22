@@ -40,7 +40,7 @@
  
 * **Error Response:**
 
-  * **Code:** 200 NOT FOUND <br />
+  * **Code:** 404 NOT FOUND <br />
     **Content:** `{ "success": 0, "message": "Invalid Token..."}`
 
   OR
